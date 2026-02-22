@@ -23,15 +23,15 @@ body {
   max-width: 420px;
   margin: auto;
   padding: 16px;
-  padding-bottom: 160px;
+  padding-bottom: 140px;
 }
 
-/* HEADER */
+/* TOP BAR */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .profile {
@@ -54,24 +54,19 @@ body {
   border-radius: 14px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 14px;
 }
 
 /* HERO IMAGE */
-.hero {
+.hero img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
   border-radius: 16px;
-  overflow: hidden;
   margin-bottom: 14px;
 }
 
-.hero img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-/* PINK BANNER */
+/* BANNER */
 .banner {
   background: #ff4d6d;
   padding: 14px;
@@ -87,10 +82,7 @@ body {
   overflow-x: auto;
   margin-bottom: 14px;
 }
-
-.quick-options::-webkit-scrollbar {
-  display: none;
-}
+.quick-options::-webkit-scrollbar { display: none; }
 
 .quick-card {
   min-width: 120px;
@@ -110,17 +102,14 @@ body {
   padding: 6px;
 }
 
-/* FILTER CHIPS */
+/* CHIPS */
 .chips {
   display: flex;
   gap: 10px;
   overflow-x: auto;
   margin-bottom: 20px;
 }
-
-.chips::-webkit-scrollbar {
-  display: none;
-}
+.chips::-webkit-scrollbar { display: none; }
 
 .chip {
   padding: 8px 14px;
@@ -135,49 +124,54 @@ body {
 .green { background: #66bb6a; color: black; }
 .pink { background: #e040fb; }
 
-/* FLOATING NAV */
-.bottom-wrapper {
+/* BOTTOM BAR */
+.bottom-container {
   position: fixed;
   bottom: 20px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.bottom-nav {
-  background: #f6b44c;
-  width: 75%;
-  max-width: 300px;
-  border-radius: 40px;
+.bottom-inner {
+  width: 420px;
+  max-width: 95%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 14px 20px;
+}
+
+/* Left pill */
+.bottom-pill {
+  background: #f6b44c;
+  display: flex;
+  gap: 40px;
+  padding: 14px 30px;
+  border-radius: 40px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   color: black;
   font-size: 18px;
 }
 
-.floating-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+/* Right circular buttons */
+.right-buttons {
   display: flex;
   gap: 14px;
 }
 
 .circle-btn {
-  background: #f6b44c;
   width: 55px;
   height: 55px;
   border-radius: 50%;
+  background: #f6b44c;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  font-size: 22px;
   color: black;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
 }
 </style>
 </head>
@@ -186,48 +180,44 @@ body {
 
 <div class="app">
 
-  <!-- TOP BAR -->
   <div class="top-bar">
     <div>Shubh Prabhaat, <b>Seema</b></div>
     <div class="profile">
-      <img src="https://picsum.photos/100">
+      <!-- FIXED IMAGE -->
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200">
     </div>
   </div>
 
-  <!-- SEARCH -->
   <div class="search">
     <span>🔍 Hindi ya English mein puche</span>
     <span>🎤</span>
   </div>
 
-  <!-- HERO IMAGE -->
+  <!-- FIXED HERO IMAGE -->
   <div class="hero">
-    <img src="https://picsum.photos/500/300">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800">
   </div>
 
-  <!-- PINK BANNER -->
   <div class="banner">
     Jaipur wali shaadi ki jhalkiya… 🥰 <br>
     <small>225 ready to view</small>
   </div>
 
-  <!-- QUICK OPTIONS -->
   <div class="quick-options">
     <div class="quick-card">
-      <img src="https://picsum.photos/200?1">
+      <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=300">
       <p>Meera's photos</p>
     </div>
     <div class="quick-card">
-      <img src="https://picsum.photos/200?2">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=300">
       <p>Try Ghibli ✨</p>
     </div>
     <div class="quick-card">
-      <img src="https://picsum.photos/200?3">
+      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=300">
       <p>Enhance photos</p>
     </div>
   </div>
 
-  <!-- FILTER CHIPS -->
   <div class="chips">
     <div class="chip red">Birthday</div>
     <div class="chip yellow">Wedding</div>
@@ -237,18 +227,22 @@ body {
 
 </div>
 
-<!-- FLOATING NAV -->
-<div class="bottom-wrapper">
-  <div class="bottom-nav">
-    📷
-    🖼️
-    📄
-  </div>
-</div>
+<!-- UPDATED BOTTOM BAR -->
+<div class="bottom-container">
+  <div class="bottom-inner">
 
-<div class="floating-btn">
-  <div class="circle-btn">+</div>
-  <div class="circle-btn">📷</div>
+    <div class="bottom-pill">
+      🏠
+      🖼️
+      📄
+    </div>
+
+    <div class="right-buttons">
+      <div class="circle-btn">＋</div>
+      <div class="circle-btn">📷</div>
+    </div>
+
+  </div>
 </div>
 
 </body>
