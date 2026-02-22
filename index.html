@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Photo App UI</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #2b0000, #000);
+    color: white;
+}
+
+.container {
+    padding: 16px;
+    max-width: 420px;
+    margin: auto;
+}
+
+/* Header */
+.header {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.search-box {
+    background: #8b0000;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+/* Banner */
+.banner {
+    background: #ff4d6d;
+    padding: 14px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+/* Horizontal scroll */
+.scroll-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.scroll-row img {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+/* Section Title */
+.section-title {
+    font-weight: bold;
+    margin: 20px 0 10px;
+}
+
+/* AI Magic Card */
+.magic-card {
+    background: linear-gradient(45deg, orange, #ff9800);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+    color: black;
+}
+
+/* Collage Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.grid img {
+    width: 100%;
+    border-radius: 12px;
+    height: 100px;
+    object-fit: cover;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 420px;
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+}
+
+.bottom-nav button {
+    background: gold;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        Shubh Prabhaat, <b>Seema</b>
+    </div>
+
+    <div class="search-box">
+        🔍 Hindi ya English mein puche
+    </div>
+
+    <div class="banner">
+        Jaipur wali shaadi ki jhalkiya… 🥰
+    </div>
+
+    <div class="section-title">For you 💕</div>
+
+    <div class="scroll-row">
+        <img src="https://picsum.photos/200/300?1">
+        <img src="https://picsum.photos/200/300?2">
+        <img src="https://picsum.photos/200/300?3">
+        <img src="https://picsum.photos/200/300?4">
+    </div>
+
+    <div class="section-title">AI magic for you ✨</div>
+
+    <div class="scroll-row">
+        <img src="https://picsum.photos/200/300?5">
+        <img src="https://picsum.photos/200/300?6">
+    </div>
+
+    <div class="magic-card">
+        Try some AI magic ✨<br>
+        Quickly turn your photos into work of art
+    </div>
+
+    <div class="section-title">Collages</div>
+
+    <div class="grid">
+        <img src="https://picsum.photos/200?7">
+        <img src="https://picsum.photos/200?8">
+        <img src="https://picsum.photos/200?9">
+        <img src="https://picsum.photos/200?10">
+        <img src="https://picsum.photos/200?11">
+        <img src="https://picsum.photos/200?12">
+    </div>
+
+</div>
+
+<div class="bottom-nav">
+    <button>📷</button>
+    <button>➕</button>
+    <button>📁</button>
+</div>
+
+</body>
+</html>
