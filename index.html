@@ -19,105 +19,123 @@ body {
   overflow-x: hidden;
 }
 
-/* Main Container */
 .app {
   max-width: 420px;
   margin: auto;
   padding: 16px;
-  padding-bottom: 160px; /* space for floating bottom bar */
+  padding-bottom: 160px;
 }
 
-/* Header */
-.header {
-  font-size: 18px;
-  margin-bottom: 16px;
-}
-
-/* Search Bar */
-.search {
-  background: #8c0d17;
-  padding: 12px;
-  border-radius: 14px;
-  margin-bottom: 16px;
-  font-size: 14px;
-  opacity: 0.95;
-}
-
-/* Banner */
-.banner {
-  background: #ff4d6d;
-  padding: 14px;
-  border-radius: 16px;
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
-/* Sections */
-.section {
-  margin-bottom: 24px;
-}
-
-.section h3 {
-  margin-bottom: 10px;
-}
-
-/* Horizontal Scroll */
-.scroll-row {
+/* HEADER */
+.top-bar {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 6px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
-.scroll-row::-webkit-scrollbar {
-  display: none;
-}
-.scroll-row {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Cards */
-.card {
-  min-width: 130px;
-  height: 170px;
-  border-radius: 16px;
+.profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
-.card img {
+.profile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Magic Button */
-.magic-button {
-  background: linear-gradient(45deg, #ff9800, #ffb74d);
-  color: black;
-  padding: 18px;
-  text-align: center;
-  border-radius: 18px;
-  font-weight: bold;
-  margin-top: 12px;
+/* SEARCH */
+.search {
+  background: #8c0d17;
+  padding: 12px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
 }
 
-/* Collage Grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+/* HERO IMAGE */
+.hero {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 14px;
 }
 
-.grid img {
+.hero img {
   width: 100%;
-  height: 100px;
-  border-radius: 12px;
+  height: 180px;
   object-fit: cover;
 }
 
-/* Floating Bottom Wrapper */
+/* PINK BANNER */
+.banner {
+  background: #ff4d6d;
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* QUICK OPTIONS */
+.quick-options {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-bottom: 14px;
+}
+
+.quick-options::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-card {
+  min-width: 120px;
+  background: #222;
+  border-radius: 14px;
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.quick-card img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+}
+
+.quick-card p {
+  padding: 6px;
+}
+
+/* FILTER CHIPS */
+.chips {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.red { background: #ff4d6d; }
+.yellow { background: #ffd54f; color: black; }
+.green { background: #66bb6a; color: black; }
+.pink { background: #e040fb; }
+
+/* FLOATING NAV */
 .bottom-wrapper {
   position: fixed;
   bottom: 20px;
@@ -127,7 +145,6 @@ body {
   justify-content: center;
 }
 
-/* Center Pill Navigation */
 .bottom-nav {
   background: #f6b44c;
   width: 75%;
@@ -142,7 +159,6 @@ body {
   font-size: 18px;
 }
 
-/* Right Floating Buttons */
 .floating-btn {
   position: fixed;
   bottom: 20px;
@@ -161,7 +177,6 @@ body {
   align-items: center;
   font-size: 20px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.5);
-  cursor: pointer;
   color: black;
 }
 </style>
@@ -171,60 +186,58 @@ body {
 
 <div class="app">
 
-  <div class="header">
-    Shubh Prabhaat, <b>Seema</b>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div>Shubh Prabhaat, <b>Seema</b></div>
+    <div class="profile">
+      <img src="https://picsum.photos/100">
+    </div>
   </div>
 
+  <!-- SEARCH -->
   <div class="search">
-    🔍 Hindi ya English mein puche
+    <span>🔍 Hindi ya English mein puche</span>
+    <span>🎤</span>
   </div>
 
+  <!-- HERO IMAGE -->
+  <div class="hero">
+    <img src="https://picsum.photos/500/300">
+  </div>
+
+  <!-- PINK BANNER -->
   <div class="banner">
     Jaipur wali shaadi ki jhalkiya… 🥰 <br>
     <small>225 ready to view</small>
   </div>
 
-  <!-- For You -->
-  <div class="section">
-    <h3>For you 💕</h3>
-    <div class="scroll-row">
-      <div class="card"><img src="https://picsum.photos/200/300?1"></div>
-      <div class="card"><img src="https://picsum.photos/200/300?2"></div>
-      <div class="card"><img src="https://picsum.photos/200/300?3"></div>
-      <div class="card"><img src="https://picsum.photos/200/300?4"></div>
+  <!-- QUICK OPTIONS -->
+  <div class="quick-options">
+    <div class="quick-card">
+      <img src="https://picsum.photos/200?1">
+      <p>Meera's photos</p>
+    </div>
+    <div class="quick-card">
+      <img src="https://picsum.photos/200?2">
+      <p>Try Ghibli ✨</p>
+    </div>
+    <div class="quick-card">
+      <img src="https://picsum.photos/200?3">
+      <p>Enhance photos</p>
     </div>
   </div>
 
-  <!-- AI Magic -->
-  <div class="section">
-    <h3>AI magic for you ✨</h3>
-    <div class="scroll-row">
-      <div class="card"><img src="https://picsum.photos/200/300?5"></div>
-      <div class="card"><img src="https://picsum.photos/200/300?6"></div>
-    </div>
-
-    <div class="magic-button">
-      Try some AI magic ✨<br>
-      Quickly turn your photos into work of art
-    </div>
-  </div>
-
-  <!-- Collages -->
-  <div class="section">
-    <h3>Collages</h3>
-    <div class="grid">
-      <img src="https://picsum.photos/200?7">
-      <img src="https://picsum.photos/200?8">
-      <img src="https://picsum.photos/200?9">
-      <img src="https://picsum.photos/200?10">
-      <img src="https://picsum.photos/200?11">
-      <img src="https://picsum.photos/200?12">
-    </div>
+  <!-- FILTER CHIPS -->
+  <div class="chips">
+    <div class="chip red">Birthday</div>
+    <div class="chip yellow">Wedding</div>
+    <div class="chip green">Goa trip</div>
+    <div class="chip pink">Meena ki shaadi</div>
   </div>
 
 </div>
 
-<!-- Floating Center Bar -->
+<!-- FLOATING NAV -->
 <div class="bottom-wrapper">
   <div class="bottom-nav">
     📷
@@ -233,7 +246,6 @@ body {
   </div>
 </div>
 
-<!-- Floating Right Buttons -->
 <div class="floating-btn">
   <div class="circle-btn">+</div>
   <div class="circle-btn">📷</div>
