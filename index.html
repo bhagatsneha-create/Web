@@ -3,172 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Photo App UI</title>
+<title>AI Photo App</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, #2b0000, #000);
-    color: white;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-    padding: 16px;
-    max-width: 420px;
-    margin: auto;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg, #3b0000, #000);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Main Container */
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 16px;
+  padding-bottom: 160px; /* space for floating bottom bar */
 }
 
 /* Header */
 .header {
-    font-size: 18px;
-    margin-bottom: 12px;
+  font-size: 18px;
+  margin-bottom: 16px;
 }
 
-.search-box {
-    background: #8b0000;
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 16px;
+/* Search Bar */
+.search {
+  background: #8c0d17;
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  opacity: 0.95;
 }
 
 /* Banner */
 .banner {
-    background: #ff4d6d;
-    padding: 14px;
-    border-radius: 16px;
-    margin-bottom: 20px;
+  background: #ff4d6d;
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
 }
 
-/* Horizontal scroll */
+/* Sections */
+.section {
+  margin-bottom: 24px;
+}
+
+.section h3 {
+  margin-bottom: 10px;
+}
+
+/* Horizontal Scroll */
 .scroll-row {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
 }
 
-.scroll-row img {
-    width: 120px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 16px;
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+.scroll-row {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Section Title */
-.section-title {
-    font-weight: bold;
-    margin: 20px 0 10px;
+/* Cards */
+.card {
+  min-width: 130px;
+  height: 170px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-/* AI Magic Card */
-.magic-card {
-    background: linear-gradient(45deg, orange, #ff9800);
-    padding: 20px;
-    border-radius: 16px;
-    text-align: center;
-    font-weight: bold;
-    margin: 20px 0;
-    color: black;
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Magic Button */
+.magic-button {
+  background: linear-gradient(45deg, #ff9800, #ffb74d);
+  color: black;
+  padding: 18px;
+  text-align: center;
+  border-radius: 18px;
+  font-weight: bold;
+  margin-top: 12px;
 }
 
 /* Collage Grid */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
 .grid img {
-    width: 100%;
-    border-radius: 12px;
-    height: 100px;
-    object-fit: cover;
+  width: 100%;
+  height: 100px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
-/* Bottom Nav */
+/* Floating Bottom Wrapper */
+.bottom-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Center Pill Navigation */
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-width: 420px;
-    background: #111;
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0;
+  background: #f6b44c;
+  width: 75%;
+  max-width: 300px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 14px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  color: black;
+  font-size: 18px;
 }
 
-.bottom-nav button {
-    background: gold;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 50%;
-    cursor: pointer;
+/* Right Floating Buttons */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 14px;
+}
+
+.circle-btn {
+  background: #f6b44c;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  cursor: pointer;
+  color: black;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-    <div class="header">
-        Shubh Prabhaat, <b>Seema</b>
-    </div>
+  <div class="header">
+    Shubh Prabhaat, <b>Seema</b>
+  </div>
 
-    <div class="search-box">
-        🔍 Hindi ya English mein puche
-    </div>
+  <div class="search">
+    🔍 Hindi ya English mein puche
+  </div>
 
-    <div class="banner">
-        Jaipur wali shaadi ki jhalkiya… 🥰
-    </div>
+  <div class="banner">
+    Jaipur wali shaadi ki jhalkiya… 🥰 <br>
+    <small>225 ready to view</small>
+  </div>
 
-    <div class="section-title">For you 💕</div>
-
+  <!-- For You -->
+  <div class="section">
+    <h3>For you 💕</h3>
     <div class="scroll-row">
-        <img src="https://picsum.photos/200/300?1">
-        <img src="https://picsum.photos/200/300?2">
-        <img src="https://picsum.photos/200/300?3">
-        <img src="https://picsum.photos/200/300?4">
+      <div class="card"><img src="https://picsum.photos/200/300?1"></div>
+      <div class="card"><img src="https://picsum.photos/200/300?2"></div>
+      <div class="card"><img src="https://picsum.photos/200/300?3"></div>
+      <div class="card"><img src="https://picsum.photos/200/300?4"></div>
     </div>
+  </div>
 
-    <div class="section-title">AI magic for you ✨</div>
-
+  <!-- AI Magic -->
+  <div class="section">
+    <h3>AI magic for you ✨</h3>
     <div class="scroll-row">
-        <img src="https://picsum.photos/200/300?5">
-        <img src="https://picsum.photos/200/300?6">
+      <div class="card"><img src="https://picsum.photos/200/300?5"></div>
+      <div class="card"><img src="https://picsum.photos/200/300?6"></div>
     </div>
 
-    <div class="magic-card">
-        Try some AI magic ✨<br>
-        Quickly turn your photos into work of art
+    <div class="magic-button">
+      Try some AI magic ✨<br>
+      Quickly turn your photos into work of art
     </div>
+  </div>
 
-    <div class="section-title">Collages</div>
-
+  <!-- Collages -->
+  <div class="section">
+    <h3>Collages</h3>
     <div class="grid">
-        <img src="https://picsum.photos/200?7">
-        <img src="https://picsum.photos/200?8">
-        <img src="https://picsum.photos/200?9">
-        <img src="https://picsum.photos/200?10">
-        <img src="https://picsum.photos/200?11">
-        <img src="https://picsum.photos/200?12">
+      <img src="https://picsum.photos/200?7">
+      <img src="https://picsum.photos/200?8">
+      <img src="https://picsum.photos/200?9">
+      <img src="https://picsum.photos/200?10">
+      <img src="https://picsum.photos/200?11">
+      <img src="https://picsum.photos/200?12">
     </div>
+  </div>
 
 </div>
 
-<div class="bottom-nav">
-    <button>📷</button>
-    <button>➕</button>
-    <button>📁</button>
-</div>
 <!-- Floating Center Bar -->
 <div class="bottom-wrapper">
   <div class="bottom-nav">
-    <span>📷</span>
-    <span>🖼️</span>
-    <span>📄</span>
+    📷
+    🖼️
+    📄
   </div>
 </div>
 
@@ -177,6 +238,6 @@ body {
   <div class="circle-btn">+</div>
   <div class="circle-btn">📷</div>
 </div>
-</body>
 
+</body>
 </html>
