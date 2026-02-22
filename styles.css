@@ -1,0 +1,46 @@
+/* Bottom Navigation Wrapper */
+.bottom-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* allow only inner elements clickable */
+}
+
+/* Main Floating Bar */
+.bottom-nav {
+  background: #f6b44c;
+  width: 75%;
+  max-width: 300px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  pointer-events: auto;
+}
+
+/* Small Floating Circle Buttons */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 14px;
+}
+
+.circle-btn {
+  background: #f6b44c;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
