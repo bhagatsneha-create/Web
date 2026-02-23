@@ -83,7 +83,7 @@
 
     .bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;max-width:390px;width:calc(100% - 24px);display:flex;justify-content:space-between;align-items:center;pointer-events:none}
     .dock{background:var(--yellow);border-radius:999px;padding:14px 28px;display:flex;gap:36px;box-shadow:0 12px 26px #0009;pointer-events:auto}
-    .dock i,.fab i{font-style:normal;font-size:19px;color:#180b06}
+    .dock svg,.fab svg{width:19px;height:19px;stroke:#120805;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .fab-wrap{display:flex;gap:10px;pointer-events:auto}
     .fab{width:44px;height:44px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;box-shadow:0 10px 22px #0009}
   </style>
@@ -184,8 +184,19 @@
   </main>
 
   <div class="bottom">
-    <div class="dock"><i>🏠</i><i>🖼️</i><i>📄</i></div>
-    <div class="fab-wrap"><div class="fab"><i>＋</i></div><div class="fab"><i>📷</i></div></div>
+    <div class="dock">
+      <svg viewBox="0 0 24 24" aria-label="Home"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
+      <svg viewBox="0 0 24 24" aria-label="Gallery"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="1.6"></circle><path d="m21 16-5-4-4 3-2-2-4 3"></path></svg>
+      <svg viewBox="0 0 24 24" aria-label="Document"><path d="M8 3h6l4 4v14H8z"></path><path d="M14 3v5h4"></path></svg>
+    </div>
+    <div class="fab-wrap">
+      <div class="fab" aria-label="Add">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+      </div>
+      <div class="fab" aria-label="Camera">
+        <svg viewBox="0 0 24 24"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg>
+      </div>
+    </div>
   </div>
 
   <script>
