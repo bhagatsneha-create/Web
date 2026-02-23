@@ -272,6 +272,28 @@ body{
   display:flex;justify-content:center;align-items:center;
   box-shadow:0 6px 16px rgba(0,0,0,.5);
 }
+  .overlay-screen{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  background:#430C0D;
+  z-index:5000;
+  padding:20px;
+  overflow-y:auto;
+}
+.back-btn{
+  background:#FFC857;
+  color:black;
+  padding:8px 14px;
+  border-radius:8px;
+  display:inline-block;
+  margin-bottom:20px;
+  cursor:pointer;
+  font-weight:bold;
+}
 svg{width:22px;height:22px;}
 </style>
 </head>
@@ -329,7 +351,7 @@ svg{width:22px;height:22px;}
   </div>
 </div>
 
-<div class="ai-camera">
+<div class="ai-camera" onclick="openCamera()" style="cursor:pointer;">
   <div>
     <strong>Try the AI camera</strong>
   </div>
@@ -360,7 +382,7 @@ svg{width:22px;height:22px;}
       <img src="images/hero2.png">
     </div>
   </div>
-  <div class="magic-btn">
+  <div class="magic-btn" onclick="openMagic()" style="cursor:pointer;">
     Try some AI magic ✨
   </div>
 </div>
@@ -463,8 +485,35 @@ document.addEventListener("DOMContentLoaded", function() {
   }, 3000);
 });
 </script>
+<!-- AI CAMERA SCREEN -->
+<div id="cameraScreen" class="overlay-screen">
+  <div class="back-btn" onclick="goHome()">⬅ Back</div>
+  <h2>AI Camera</h2>
+  <p>Prototype Camera Flow</p>
+</div>
 
+<!-- AI MAGIC SCREEN -->
+<div id="magicScreen" class="overlay-screen">
+  <div class="back-btn" onclick="goHome()">⬅ Back</div>
+  <h2>AI Magic Studio</h2>
+  <p>Prototype Magic Flow</p>
+</div>
+  <script>
+function openCamera(){
+  document.getElementById("cameraScreen").style.display="block";
+}
+
+function openMagic(){
+  document.getElementById("magicScreen").style.display="block";
+}
+
+function goHome(){
+  document.getElementById("cameraScreen").style.display="none";
+  document.getElementById("magicScreen").style.display="none";
+}
+</script>
 </body>
 </html>
+
 
 
