@@ -32,23 +32,23 @@ body{
 .profile{
   width:38px;height:38px;border-radius:50%;overflow:hidden;
 }
-.profile img{width:100%;height:100%;object-fit:cover;}
-
-/* HERO */
-.hero{
-  position:relative;
-  height:200px;
-  border-radius:18px;
-  overflow:hidden;
-  margin-bottom:16px;
-}
-.slide{
-  position:absolute;
+.profile img{
   width:100%;
   height:100%;
   object-fit:cover;
-  opacity:0;
-  transition:.6s;
+  object-position:center top;
+}
+
+/* HERO */
+.hero{
+  aspect-ratio:16/9;
+}
+
+.slide{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 30%;
 }
 .slide.active{opacity:1;}
 
@@ -428,6 +428,7 @@ function capturePhoto(){
 
 </body>
 </html>
+
 
 
 
