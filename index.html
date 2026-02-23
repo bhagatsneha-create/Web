@@ -23,33 +23,33 @@
       color:var(--text);
       min-height:100vh;
     }
-    .screen{max-width:390px;margin:0 auto;padding:10px 12px 110px}
-    .status{display:flex;justify-content:space-between;align-items:center;padding:6px 4px 12px;font-weight:700;font-size:22px}
-    .status .icons{font-size:14px;letter-spacing:1px;opacity:.9}
+    .screen{max-width:390px;margin:0 auto;padding:8px 12px 110px}
+    .status{display:flex;justify-content:space-between;align-items:center;padding:4px 2px 10px;font-weight:700;font-size:22px}
+    .status .icons{font-size:12px;letter-spacing:1px;opacity:.9}
 
-    .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .top h1{font-size:27px;line-height:1.2;font-weight:600}
+    .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .top h1{font-size:30px;line-height:1.2;font-weight:500}
     .top h1 b{font-weight:800}
-    .avatar{width:34px;height:34px;border-radius:50%;overflow:hidden;border:2px solid #fff7}
+    .avatar{width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid #fff7}
     .avatar img{width:100%;height:100%;object-fit:cover}
 
-    .search{display:flex;align-items:center;gap:10px;background:#7e001f;border:2px solid #f9dfe7;padding:10px 12px;border-radius:12px;margin-bottom:10px;font-weight:600}
+    .search{display:flex;align-items:center;gap:10px;background:#7e001f;border:2px solid #f9dfe7;padding:11px 12px;border-radius:10px;margin-bottom:10px;font-weight:600;font-size:15px}
     .search .grow{flex:1}
     .search svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-    .hero{position:relative;border-radius:16px;overflow:hidden;height:250px;margin-bottom:12px;box-shadow:0 8px 24px #0008}
-    .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
+    .hero{position:relative;border-radius:16px;overflow:hidden;height:218px;margin-bottom:10px;box-shadow:0 8px 24px #0008}
+    .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity .6s ease}
     .hero-slide.active{opacity:1}
 
-    .highlight{background:#ea3f73;color:#ffe8ef;border-radius:14px;padding:10px 14px;margin-bottom:12px;font-size:22px;font-weight:700;display:flex;justify-content:space-between;align-items:center;min-height:74px}
-    .highlight small{display:block;font-size:14px;font-weight:500;opacity:.9;margin-top:2px}
+    .highlight{background:#980027;color:#ffe8ef;border-radius:14px;padding:10px 14px;margin-bottom:10px;font-size:20px;font-weight:700;display:flex;justify-content:space-between;align-items:center;min-height:70px}
+    .highlight small{display:block;font-size:15px;font-weight:500;opacity:.95;margin-top:2px}
     .highlight svg{width:18px;height:18px;stroke:#ffe8ef;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-    .h-scroll{display:flex;overflow-x:auto;gap:10px;padding-bottom:4px;scrollbar-width:none}
+    .h-scroll{display:flex;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:none}
     .h-scroll::-webkit-scrollbar{display:none}
-    .mini-card{min-width:112px;background:#f7efe4;color:#1f1616;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px #0006}
-    .mini-card img{width:100%;height:70px;object-fit:cover}
-    .mini-card p{padding:7px 8px;font-size:13px;font-weight:600;white-space:nowrap}
+    .mini-card{min-width:104px;background:#f7efe4;color:#1f1616;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px #0006}
+    .mini-card img{width:100%;height:64px;object-fit:cover}
+    .mini-card p{padding:7px 8px;font-size:12px;font-weight:600;white-space:nowrap}
 
     .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px 0 12px}
     .chips::-webkit-scrollbar{display:none}
@@ -92,6 +92,12 @@
     .dock svg,.fab svg{width:19px;height:19px;stroke:#120805;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .fab-wrap{display:flex;gap:10px;pointer-events:auto}
     .fab{width:44px;height:44px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;box-shadow:0 10px 22px #0009}
+
+    @media (max-width:390px){
+      .status{font-size:11px}
+      .top h1{font-size:28px}
+      .top h1 b{font-weight:700}
+    }
   </style>
 </head>
 <body>
