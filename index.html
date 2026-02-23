@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Festival AI Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#120406;
@@ -15,7 +18,7 @@
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:"Encode Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at 55% 0%, #3b0c13 0%, #120406 45%, #060304 100%);
       color:var(--text);
       min-height:100vh;
@@ -30,15 +33,17 @@
     .avatar{width:34px;height:34px;border-radius:50%;overflow:hidden;border:2px solid #fff7}
     .avatar img{width:100%;height:100%;object-fit:cover}
 
-    .search{display:flex;align-items:center;gap:10px;background:#7e001f;border:2px solid #f9dfe7;padding:12px 14px;border-radius:12px;margin-bottom:10px;font-weight:600}
+    .search{display:flex;align-items:center;gap:10px;background:#7e001f;border:2px solid #f9dfe7;padding:10px 12px;border-radius:12px;margin-bottom:10px;font-weight:600}
     .search .grow{flex:1}
+    .search svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
     .hero{position:relative;border-radius:16px;overflow:hidden;height:250px;margin-bottom:12px;box-shadow:0 8px 24px #0008}
     .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
     .hero-slide.active{opacity:1}
 
-    .highlight{background:#ea3f73;color:#ffe8ef;border-radius:14px;padding:14px 16px;margin-bottom:12px;font-size:27px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-    .highlight small{display:block;font-size:15px;font-weight:500;opacity:.9;margin-top:3px}
+    .highlight{background:#ea3f73;color:#ffe8ef;border-radius:14px;padding:10px 14px;margin-bottom:12px;font-size:22px;font-weight:700;display:flex;justify-content:space-between;align-items:center;min-height:74px}
+    .highlight small{display:block;font-size:14px;font-weight:500;opacity:.9;margin-top:2px}
+    .highlight svg{width:18px;height:18px;stroke:#ffe8ef;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
     .h-scroll{display:flex;overflow-x:auto;gap:10px;padding-bottom:4px;scrollbar-width:none}
     .h-scroll::-webkit-scrollbar{display:none}
@@ -58,15 +63,16 @@
     .story img{width:100%;height:100%;object-fit:cover}
     .story span{position:absolute;left:8px;bottom:8px;font-size:13px;font-weight:700;text-shadow:0 2px 6px #000}
 
-    .camera-banner{display:flex;justify-content:space-between;align-items:center;background:#dfc8f2;color:#1d1820;padding:12px 14px;border-radius:14px;margin:14px 0}
-    .camera-banner b{font-size:28px}
-    .camera-banner span{font-size:20px;opacity:.8}
+    .camera-banner{display:flex;justify-content:space-between;align-items:center;background:#dfc8f2;color:#1d1820;padding:10px 12px;border-radius:14px;margin:14px 0;min-height:72px}
+    .camera-banner b{font-size:24px}
+    .camera-banner span{font-size:18px;opacity:.8}
+    .camera-banner svg{width:24px;height:24px;stroke:#1d1820;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
     .magic{min-width:128px;height:188px;border-radius:14px;overflow:hidden;position:relative}
     .magic img{width:100%;height:100%;object-fit:cover}
     .magic b{position:absolute;left:10px;bottom:26px;font-size:14px}
-    .cta{margin:16px 0;background:#f4a934;color:#241105;border-radius:10px;text-align:center;padding:16px 12px;font-weight:800;font-size:39px}
-    .cta small{display:block;font-size:22px;font-weight:600;margin-top:4px}
+    .cta{margin:16px 0;background:#f4a934;color:#241105;border-radius:10px;text-align:center;padding:10px 10px;font-weight:800;font-size:33px;min-height:76px;display:flex;flex-direction:column;justify-content:center;gap:3px}
+    .cta small{display:block;font-size:18px;font-weight:600;margin-top:0}
 
     .collage-title,.video-title{font-size:49px;color:#f7c843;font-weight:800;text-align:center;margin-top:8px}
     .subtitle{font-size:23px;color:#f2d495;text-align:center;margin-bottom:10px}
@@ -97,7 +103,11 @@
       <div class="avatar"><img src="images/profile.png" alt="profile"></div>
     </div>
 
-    <div class="search"><span>🔍</span><span class="grow">Hindi ya English mein puche</span><span>🎙️</span></div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <span class="grow">Hindi ya English mein puche</span>
+      <svg viewBox="0 0 24 24" aria-label="Microphone"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M6 11a6 6 0 0 0 12 0"></path><path d="M12 17v4"></path></svg>
+    </div>
 
     <div class="hero" aria-label="Festival highlights slideshow">
       <img class="hero-slide active" src="images/hero1.png" alt="friends celebrating">
@@ -105,9 +115,9 @@
       <img class="hero-slide" src="images/hero3.png" alt="traditional celebration">
     </div>
 
-    <div class="highlight"> 
+    <div class="highlight">
       <div>Jaipur wali shaadi ki jhalkiya..🥰<small>225 ready to view</small></div>
-      <div>›</div>
+      <svg viewBox="0 0 24 24" aria-label="Open"><path d="M9 6l6 6-6 6"></path></svg>
     </div>
 
     <div class="h-scroll">
@@ -135,7 +145,7 @@
       </div>
     </section>
 
-    <div class="camera-banner"><div><b>Try the AI camera</b><br><span>Point, shoot, and let AI wow you</span></div><div>📷</div></div>
+    <div class="camera-banner"><div><b>Try the AI camera</b><br><span>Point, shoot, and let AI wow you</span></div><svg viewBox="0 0 24 24" aria-label="Camera"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg></div>
 
     <section class="section">
       <h2>Memories🥰</h2>
