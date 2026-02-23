@@ -34,7 +34,8 @@
     .search .grow{flex:1}
 
     .hero{position:relative;border-radius:16px;overflow:hidden;height:250px;margin-bottom:12px;box-shadow:0 8px 24px #0008}
-    .hero img{width:100%;height:100%;object-fit:cover}
+    .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
+    .hero-slide.active{opacity:1}
 
     .highlight{background:#ea3f73;color:#ffe8ef;border-radius:14px;padding:14px 16px;margin-bottom:12px;font-size:27px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
     .highlight small{display:block;font-size:15px;font-weight:500;opacity:.9;margin-top:3px}
@@ -61,7 +62,7 @@
     .camera-banner b{font-size:28px}
     .camera-banner span{font-size:20px;opacity:.8}
 
-    .magic{min-width:145px;height:220px;border-radius:14px;overflow:hidden;position:relative}
+    .magic{min-width:128px;height:188px;border-radius:14px;overflow:hidden;position:relative}
     .magic img{width:100%;height:100%;object-fit:cover}
     .magic b{position:absolute;left:10px;bottom:26px;font-size:14px}
     .cta{margin:16px 0;background:#f4a934;color:#241105;border-radius:10px;text-align:center;padding:16px 12px;font-weight:800;font-size:39px}
@@ -98,7 +99,11 @@
 
     <div class="search"><span>🔍</span><span class="grow">Hindi ya English mein puche</span><span>🎙️</span></div>
 
-    <div class="hero"><img src="images/hero1.png" alt="friends"></div>
+    <div class="hero" aria-label="Festival highlights slideshow">
+      <img class="hero-slide active" src="images/hero1.png" alt="friends celebrating">
+      <img class="hero-slide" src="images/hero2.png" alt="festival portrait">
+      <img class="hero-slide" src="images/hero3.png" alt="traditional celebration">
+    </div>
 
     <div class="highlight"> 
       <div>Jaipur wali shaadi ki jhalkiya..🥰<small>225 ready to view</small></div>
@@ -182,5 +187,16 @@
     <div class="dock"><i>🏠</i><i>🖼️</i><i>📄</i></div>
     <div class="fab-wrap"><div class="fab"><i>＋</i></div><div class="fab"><i>📷</i></div></div>
   </div>
+
+  <script>
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    let heroIndex = 0;
+
+    setInterval(() => {
+      heroSlides[heroIndex].classList.remove('active');
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('active');
+    }, 2800);
+  </script>
 </body>
 </html>
