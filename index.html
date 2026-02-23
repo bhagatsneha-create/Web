@@ -6,7 +6,119 @@
 <title>AI Photo App</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+.camera-screen{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#430C0D;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+}
+
+.camera-header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+  color:white;
+}
+
+.camera-close{
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:white;
+  padding:10px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.camera-preview{
+  flex:1;
+  margin:10px 20px;
+  border-radius:40px;
+  background:#111;
+  position:relative;
+  overflow:hidden;
+}
+
+.focus-circle{
+  position:absolute;
+  width:120px;
+  height:120px;
+  border:2px solid rgba(255,255,255,0.5);
+  border-radius:50%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.camera-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.6),transparent);
+}
+
+.camera-controls{
+  height:150px;
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+}
+
+.gallery-thumb{
+  width:60px;
+  height:60px;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.gallery-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.capture-btn{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#FFF8E7;
+  border:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.inner-circle{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  border:3px solid rgba(0,0,0,0.2);
+}
+
+.rotate-btn{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  cursor:pointer;
+}
+
+#flashEffect{
+  position:fixed;
+  inset:0;
+  background:white;
+  opacity:0;
+  pointer-events:none;
+  z-index:10000;
+}
+  
+  *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,sans-serif;
@@ -512,8 +624,57 @@ function goHome(){
   document.getElementById("magicScreen").style.display="none";
 }
 </script>
+  <!-- CAMERA SCREEN -->
+<div id="cameraScreen" class="camera-screen">
+
+  <!-- Header -->
+  <div class="camera-header">
+    <button onclick="closeCamera()" class="camera-close">✕</button>
+    <div class="camera-icons">
+      ⚡ ⚙
+    </div>
+  </div>
+
+  <!-- Camera View -->
+  <div class="camera-preview">
+    <div class="focus-circle"></div>
+    <div class="camera-overlay"></div>
+  </div>
+
+  <!-- Bottom Controls -->
+  <div class="camera-controls">
+    <div class="gallery-thumb">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200">
+    </div>
+
+    <button class="capture-btn" onclick="capturePhoto()">
+      <div class="inner-circle"></div>
+    </button>
+
+    <div class="rotate-btn">⟳</div>
+  </div>
+
+</div>
+
+<div id="flashEffect"></div>
+<script>
+function openCamera(){
+  document.getElementById("cameraScreen").style.display="flex";
+}
+
+function closeCamera(){
+  document.getElementById("cameraScreen").style.display="none";
+}
+
+function capturePhoto(){
+  const flash = document.getElementById("flashEffect");
+  flash.style.opacity = "1";
+  setTimeout(()=>{ flash.style.opacity = "0"; },200);
+}
+</script>
 </body>
 </html>
+
 
 
 
