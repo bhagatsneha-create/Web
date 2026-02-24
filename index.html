@@ -127,6 +127,7 @@
       <img class="hero-slide" src="images/hero2.png" alt="festival portrait">
       <img class="hero-slide" src="images/hero3.png" alt="traditional celebration">
     </div>
+
     <div class="highlight">
       <div>Jaipur wali shaadi ki jhalkiya..🥰<small>225 ready to view</small></div>
       <svg viewBox="0 0 24 24" aria-label="Open"><path d="M9 6l6 6-6 6"></path></svg>
@@ -137,6 +138,14 @@
       <div class="mini-card"><img src="images/ghibli.png" alt=""><p>Try Ghibli ✨</p></div>
       <div class="mini-card"><img src="images/blur-before.png" alt=""><p>Enhance photos</p></div>
     </div>
+
+    <div class="h-scroll">
+      <div class="mini-card"><img src="images/profile1.jpg" alt=""><p>Meera's photos</p></div>
+      <div class="mini-card"><img src="images/ghibli.png" alt=""><p>Try Ghibli ✨</p></div>
+      <div class="mini-card"><img src="images/blur-before.png" alt=""><p>Enhance photos</p></div>
+      <div class="mini-card"><img src="images/gm.png" alt=""><p>Create greetings</p></div>
+    </div>
+
     <div class="chips">
       <span class="chip" style="background:#ff3d65">Birthday</span>
       <span class="chip" style="background:#ffe154">Wedding</span>
@@ -155,6 +164,18 @@
     </section>
 
     <div class="camera-banner" id="aiCameraTrigger"><div><b>Try the AI camera</b><br><span>Point, shoot, and let AI wow you</span></div><svg viewBox="0 0 24 24" aria-label="Camera"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg></div>
+
+    <section class="section">
+      <h2>For you 💕</h2>
+      <p>Because of Shivratri & recent celebrations</p>
+      <div class="h-scroll">
+        <div class="story"><img src="images/hero2.png" alt=""><span>Festivals</span></div>
+        <div class="story"><img src="images/profile1.jpg" alt=""><span>Shivratri video is Ready</span></div>
+        <div class="story"><img src="images/hero3.png" alt=""><span>Celebration 🪔</span></div>
+      </div>
+    </section>
+
+    <div class="camera-banner"><div><b>Try the AI camera</b><br><span>Point, shoot, and let AI wow you</span></div><svg viewBox="0 0 24 24" aria-label="Camera"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg></div>
 
     <section class="section">
       <h2>Memories🥰</h2>
@@ -184,6 +205,22 @@
       <div class="col"><img src="images/hero3.png" alt=""><img src="images/profile1.jpg" alt=""><img src="images/blur-after.png" alt=""></div>
       <div class="col tall"><img src="images/hero1.png" alt=""><img src="images/blur-before.png" alt=""></div>
     </div>
+
+    <h3 class="collage-title">Collages</h3>
+    <div class="subtitle">select a template</div>
+
+    <div class="collage">
+      <div class="col">
+        <img src="images/profile1.jpg" alt=""><img src="images/hero2.png" alt=""><img src="images/gm.png" alt="">
+      </div>
+      <div class="col">
+        <img src="images/hero3.png" alt=""><img src="images/profile1.jpg" alt=""><img src="images/blur-after.png" alt="">
+      </div>
+      <div class="col tall">
+        <img src="images/hero1.png" alt=""><img src="images/blur-before.png" alt="">
+      </div>
+    </div>
+
     <h3 class="video-title">Create a video</h3>
     <div class="tag-cloud">
       <span class="tag">Birthday</span><span class="tag"><img src="images/profile.png" alt="">Nitin</span><span class="tag">Wedding</span><span class="tag">Vaishno Devi</span>
@@ -240,10 +277,19 @@
     </div>
     <div class="retake">RETAKE PHOTO</div>
   </section>
+      <div class="fab" aria-label="Add">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+      </div>
+      <div class="fab" aria-label="Camera">
+        <svg viewBox="0 0 24 24"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg>
+      </div>
+    </div>
+  </div>
 
   <script>
     const heroSlides = document.querySelectorAll('.hero-slide');
     let heroIndex = 0;
+
     setInterval(() => {
       heroSlides[heroIndex].classList.remove('active');
       heroIndex = (heroIndex + 1) % heroSlides.length;
