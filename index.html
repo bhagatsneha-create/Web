@@ -1,514 +1,501 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Photo App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festival AI Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--text:#fff5f6}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Encode Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(120% 75% at 55% 0%, #7a0c1f 0%, #3a030d 44%, #190107 72%, #0d0003 100%),
+                  linear-gradient(180deg,#5f0718 0%, #2b020b 52%, #0d0003 100%);
+      color:var(--text);
+      min-height:100vh;
+    }
+    .screen{max-width:390px;margin:0 auto;padding:8px 12px 88px}
+    .status{display:flex;justify-content:space-between;align-items:center;padding:4px 2px 8px;font-weight:700;font-size:20px}
+    .status .icons{font-size:12px;letter-spacing:1px;opacity:.9}
+    .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .top h1{font-size:16px;line-height:1.2;font-weight:500}
+    .top h1 b{font-weight:800}
+    .avatar{width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid #fff7}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    .search{display:flex;align-items:center;gap:10px;background:#7e001f;border:2px solid #f9dfe7;padding:9px 10px;border-radius:10px;margin-bottom:10px;font-weight:600;font-size:14px}
+    .search .grow{flex:1}
+    .search svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .hero{position:relative;border-radius:16px;overflow:hidden;height:218px;margin-bottom:10px;box-shadow:0 8px 24px #0008}
+    .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity .6s ease}
+    .hero-slide.active{opacity:1}
+    .highlight{background:#980027;color:#ffe8ef;border-radius:14px;padding:8px 11px;margin-bottom:10px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;min-height:58px}
+    .highlight small{display:block;font-size:11px;font-weight:500;opacity:.95;margin-top:1px}
+    .highlight svg{width:18px;height:18px;stroke:#ffe8ef;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .h-scroll{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:none}
+    .h-scroll::-webkit-scrollbar{display:none}
+    .mini-card{min-width:104px;background:#f7efe4;color:#1f1616;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px #0006}
+    .mini-card img{width:100%;height:64px;object-fit:cover}
+    .mini-card p{padding:6px 7px;font-size:11px;font-weight:600;white-space:nowrap}
+    .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px 0 12px}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{padding:6px 10px;border-radius:10px;color:#120406;font-size:11px;font-weight:700;white-space:nowrap}
+    .section{margin:14px 0 8px}
+    .section h2{font-size:24px;font-weight:800;margin-bottom:2px}
+    .section p{color:#d4bfc2;font-size:15px;margin-bottom:8px}
+    .story{min-width:118px;height:170px;border-radius:12px;overflow:hidden;position:relative}
+    .story img{width:100%;height:100%;object-fit:cover}
+    .story span{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:700;text-shadow:0 2px 6px #000}
+    .story .ai-badge{position:absolute;top:8px;left:8px;background:#ffe15a;color:#3d2b00;border-radius:999px;padding:3px 7px;font-size:9px;font-weight:700}
+    .for-you .story{min-width:140px;height:188px;border-radius:12px}
+    .for-you .story::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(to top,#f3a2bc 0%, rgba(243,162,188,.72) 45%, rgba(243,162,188,0) 100%)}
+    .for-you .story span{left:10px;bottom:10px;font-size:12px;color:#1d090d;text-shadow:none;z-index:2}
+    .for-you .story .ai-badge{top:8px;left:50%;transform:translateX(-50%);font-size:10px;padding:5px 11px;z-index:2}
+    .tool-banners{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+    .tool-banner{border-radius:12px;padding:10px 10px 9px;color:#fff;min-height:80px;display:flex;flex-direction:column;justify-content:space-between}
+    .tool-banner h4{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+    .tool-banner p{font-size:11px;opacity:.9;line-height:1.2}
+    .tool-banner button{margin-top:8px;height:30px;border:none;border-radius:999px;background:#5f0960;color:#fff;font-weight:700;font-size:20px;cursor:pointer}
+    .status-banner{background:linear-gradient(120deg,#5830cf,#6d1bb2)}
+    .camera-tool-banner{background:linear-gradient(120deg,#c1388c,#9c2265);cursor:pointer}
+    .camera-tool-banner button{background:#6b0f55}
+    .magic{min-width:128px;height:188px;border-radius:14px;overflow:hidden;position:relative}
+    .magic img{width:100%;height:100%;object-fit:cover}
+    .magic b{position:absolute;left:10px;bottom:26px;font-size:11px}
+    .cta{margin:14px 0;background:#f4a934;color:#241105;border-radius:10px;text-align:center;padding:8px 10px;font-weight:700;font-size:24px;min-height:62px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+    .cta small{display:block;font-size:12px;font-weight:500}
+    .collage-title,.video-title{font-size:34px;color:#f7c843;font-weight:800;text-align:center;margin-top:8px}
+    .subtitle{font-size:15px;color:#f2d495;text-align:center;margin-bottom:10px}
+    .collage{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+    .collage::-webkit-scrollbar{display:none}
+    .col{display:grid;gap:8px;min-width:142px}
+    .col img{width:100%;height:86px;border-radius:10px;object-fit:cover}
+    .col.tall img{height:180px}
+    .tag-cloud{display:flex;flex-wrap:wrap;gap:9px;justify-content:flex-start;margin-bottom:20px}
+    .tag{background:#fff;color:#2c1a1c;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:7px}
+    .tag img{width:18px;height:18px;border-radius:50%;object-fit:cover}
+    .bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;max-width:390px;width:calc(100% - 24px);display:flex;justify-content:center;align-items:center;gap:10px;pointer-events:none}
+    .dock{background:#FFB64F;border-radius:999px;padding:14px 28px;display:flex;gap:36px;box-shadow:0 12px 26px #0009;pointer-events:auto}
+    .dock svg,.fab svg{width:19px;height:19px;stroke:#120805;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .fab .add-icon{stroke:#120805}
+    .fab.camera-fab{background:#FF9EAA}
+    .fab-wrap{display:flex;gap:8px;pointer-events:auto}
+    .fab{width:44px;height:44px;border-radius:50%;background:#FFB64F;display:grid;place-items:center;box-shadow:0 10px 22px #0009;cursor:pointer}
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
+    .camera-screen,.preview-screen{position:fixed;inset:0;background:#5a030d;z-index:4000;display:none;max-width:390px;margin:0 auto;padding:12px 14px}
+    .camera-screen.active,.preview-screen.active{display:block}
+    .cam-top,.preview-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;color:#fff}
+    .cam-icon-btn,.preview-icon-btn{width:30px;height:30px;border-radius:50%;background:#ffffff22;border:none;color:#fff;font-size:18px;display:grid;place-items:center;cursor:pointer}
+    .cam-card{height:430px;border-radius:24px;background:linear-gradient(180deg,#05163f,#020d2f);border:1px solid #2a365f;display:flex;flex-direction:column;justify-content:space-between;padding:14px 12px;position:relative}
+    .focus-ring{width:118px;height:118px;border-radius:50%;border:1px solid #28456f;position:absolute;left:50%;top:44%;transform:translate(-50%,-50%)}
+    .focus-ring::after{content:"";position:absolute;inset:42%;border-left:1px solid #7f95ba;border-top:1px solid #7f95ba}
+    .cam-modes{display:flex;justify-content:center;gap:18px;font-size:8px;letter-spacing:.8px;color:#b2bfdc;font-weight:700}
+    .cam-modes b{color:#ffd23f;position:relative}
+    .cam-modes b::after{content:"";position:absolute;height:2px;background:#ffd23f;left:-3px;right:-3px;bottom:-4px}
+    .cam-note{text-align:center;color:#73809f;font-size:8px;font-style:italic;letter-spacing:1px;margin-top:14px}
+    .cam-controls{display:flex;justify-content:space-between;align-items:center;padding:10px 18px 0}
+    .thumb{width:36px;height:36px;border-radius:8px;overflow:hidden;background:#341117}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .capture{width:64px;height:64px;border-radius:50%;background:#f6efe0;border:2px solid #d9cfba;box-shadow:0 0 0 4px #fff7, 0 8px 16px #0006;cursor:pointer;position:relative}
+    .capture::before{content:"";position:absolute;inset:7px;border-radius:50%;background:#efe7d4;border:2px solid #cfc5af}
+    .capture::after{content:"";position:absolute;inset:15px;border-radius:50%;border:1px solid #ffffff66}
 
-body{
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  background:linear-gradient(180deg,#3b0000,#000);
-  color:white;
-  overflow-x:hidden;
-}
+    .preview-title{font-size:11px;font-weight:800;letter-spacing:1.4px}
+    .preview-image-wrap{background:#0a1e4a;border-radius:24px;padding:14px;margin:10px 0 16px}
+    .preview-image-wrap img{width:100%;height:300px;border-radius:16px;object-fit:cover}
+    .magic-label{text-align:center;color:#ffd16e;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:12px}
+    .enhance{width:100%;height:34px;border:none;border-radius:999px;background:linear-gradient(90deg,#f7c95f,#f3a1b1);font-size:10px;font-weight:800;cursor:pointer}
+    .preview-actions{display:flex;gap:8px;margin-top:10px}
+    .preview-actions button{flex:1;height:36px;border-radius:13px;border:1px solid #ffffff22;background:#5a141b;color:#ffd8a6;font-size:8px;font-weight:700}
+    .retake{margin-top:10px;text-align:center;font-size:8px;color:#d4b1b1;letter-spacing:.7px}
 
-.app{
-  max-width:420px;
-  margin:auto;
-  padding:16px;
-  padding-bottom:140px;
-}
 
-/* TOP BAR */
-.top-bar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:16px;
-}
-.profile{
-  width:38px;height:38px;border-radius:50%;overflow:hidden;
-}
-.profile img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center top;
-}
 
-/* HERO SLIDER */
-.hero{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;   /* keeps good proportion */
-  border-radius:18px;
-  overflow:hidden;
-  margin-bottom:16px;
-}
+    .magic-screen{position:fixed;inset:0;background:#5a030d;z-index:4200;display:none;max-width:390px;margin:0 auto;padding:14px 14px 96px;overflow:auto}
+    .magic-screen.active{display:block}
+    .magic-head{display:flex;justify-content:space-between;align-items:center;color:#fff;margin-bottom:12px}
+    .magic-head h4{font-size:22px;font-weight:800;font-style:italic}
+    .magic-close{width:30px;height:30px;border-radius:50%;border:none;background:#ffffff22;color:#fff;cursor:pointer}
+    .magic-tabs{display:flex;background:#6a1f27;border:1px solid #ffffff22;border-radius:12px;padding:4px;gap:4px;margin-bottom:12px}
+    .magic-tab{flex:1;height:32px;border:none;border-radius:9px;background:transparent;color:#f0d2cb;font-size:10px;font-weight:700;cursor:pointer}
+    .magic-tab.active{background:#ffcf73;color:#200a08}
+    .magic-pane{display:none}
+    .magic-pane.active{display:block}
+    .magic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .compare-card{background:#3f0913;border:1px solid #ffffff1f;border-radius:14px;padding:8px;cursor:pointer}
+    .compare-frame{position:relative;height:148px;border-radius:12px;overflow:hidden;background:#000}
+    .compare-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .compare-after{clip-path:inset(0 0 0 50%)}
+    .compare-range{display:none}
+    .compare-label{font-size:10px;font-weight:700;color:#ffe0b0;margin-top:3px}
+    .magic-section{margin:12px 0}
+    .magic-section h5{font-size:14px;font-weight:800;color:#fff;margin-bottom:8px}
+    .magic-row{display:flex;gap:8px;overflow:auto}
+    .magic-item{min-width:84px;background:#2f0810;border:1px solid #ffffff26;border-radius:11px;overflow:hidden}
+    .magic-item img{width:100%;height:78px;object-fit:cover}
+    .magic-item p{font-size:9px;font-weight:700;color:#ffd9a1;padding:5px 6px}
 
-.slide{
-  position:absolute;   /* VERY IMPORTANT */
-  inset:0;             /* shorthand for top:0;left:0;right:0;bottom:0 */
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 30%;
-  opacity:0;
-  transition:opacity .6s ease;
-}
+    .pick-screen,.apply-screen{position:fixed;inset:0;background:#5a030d;z-index:4300;display:none;max-width:390px;margin:0 auto;padding:14px 14px 96px}
+    .pick-screen.active,.apply-screen.active{display:block}
+    .pick-head{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+    .pick-head h5{font-size:12px;letter-spacing:1.3px;font-weight:800}
+    .pick-grid{display:flex;gap:10px}
+    .pick-item{width:86px;height:54px;border-radius:10px;overflow:hidden;border:1px solid #ffffff44;cursor:pointer}
+    .pick-item img{width:100%;height:100%;object-fit:cover}
+    .apply-title{font-size:12px;font-weight:800;letter-spacing:1px;color:#fff;text-align:center;margin:8px 0 10px}
+    .apply-card{background:#2f0810;border:1px solid #ffffff22;border-radius:16px;padding:10px}
+    .apply-card img{width:100%;height:280px;border-radius:12px;object-fit:cover}
+    .apply-btn{width:100%;height:36px;margin-top:12px;border:none;border-radius:999px;background:linear-gradient(90deg,#f7c95f,#f3a1b1);font-size:11px;font-weight:800;color:#220c09;cursor:pointer}
 
-.slide.active{
-  opacity:1;
-}
-/* SUGGESTIONS ROW */
-.suggestions-row{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  margin-bottom:20px;
-}
 
-.suggestions-row::-webkit-scrollbar{
-  display:none;
-}
-
-.suggestion-card{
-  min-width:140px;
-  height:90px;
-  border-radius:16px;
-  overflow:hidden;
-  position:relative;
-  flex-shrink:0;
-  box-shadow:0 6px 16px rgba(0,0,0,.4);
-}
-
-.suggestion-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.suggestion-overlay{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  padding:8px;
-  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
-}
-
-.suggestion-overlay p{
-  font-size:12px;
-  font-weight:500;
-}
-/* AI CAMERA */
-.ai-camera{
-  background:#d7c3f3;
-  color:black;
-  padding:16px;
-  border-radius:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:24px;
-  cursor:pointer;
-}
-
-/* SECTION */
-.section{margin-top:30px;}
-.section h3{margin-bottom:12px;}
-
-.card-row{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-}
-.card-row::-webkit-scrollbar{display:none;}
-
-.card{
-  min-width:150px;
-  border-radius:16px;
-  overflow:hidden;
-}
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
-
-/* COLLAGE */
-.collage-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-.collage-grid img{
-  width:100%;
-  height:110px;
-  object-fit:cover;
-  border-radius:14px;
-}
-
-/* VIDEO TAGS */
-.video-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.video-tag{
-  background:white;
-  color:black;
-  padding:8px 14px;
-  border-radius:20px;
-  font-size:12px;
-}
-
-/* BOTTOM NAV */
-.bottom-wrapper{
-  position:fixed;
-  bottom:20px;
-  left:0;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:16px;
-  z-index:1000;
-}
-
-/* LEFT CAPSULE */
-.bottom-left{
-  background:#f6b44c;
-  padding:16px 36px;
-  border-radius:50px;
-  display:flex;
-  align-items:center;
-  gap:45px;
-  box-shadow:0 8px 20px rgba(0,0,0,.5);
-}
-
-.bottom-left svg{
-  width:22px;
-  height:22px;
-}
-
-/* RIGHT SIDE */
-.bottom-right{
-  display:flex;
-  gap:14px;
-}
-
-.circle-btn{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 6px 16px rgba(0,0,0,.5);
-}
-
-.circle-btn svg{
-  width:22px;
-  height:22px;
-}
-
-/* COLORS */
-.yellow{
-  background:#f6b44c;
-}
-
-.pink{
-  background:#f6a1b3;
-}
-
-/* CAMERA SCREEN */
-.camera-screen{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#430C0D;
-  z-index:9999;
-  flex-direction:column;
-}
-
-.camera-header{
-  display:flex;
-  justify-content:space-between;
-  padding:20px;
-}
-
-.camera-close{
-  background:rgba(255,255,255,0.1);
-  border:none;
-  color:white;
-  padding:10px;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.camera-preview{
-  flex:1;
-  margin:10px 20px;
-  border-radius:40px;
-  background:#111;
-  position:relative;
-}
-
-.focus-circle{
-  position:absolute;
-  width:120px;
-  height:120px;
-  border:2px solid rgba(255,255,255,0.5);
-  border-radius:50%;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-}
-
-.camera-controls{
-  height:150px;
-  display:flex;
-  align-items:center;
-  justify-content:space-around;
-}
-
-.gallery-thumb{
-  width:60px;height:60px;border-radius:16px;overflow:hidden;
-}
-.gallery-thumb img{width:100%;height:100%;object-fit:cover;}
-
-.capture-btn{
-  width:90px;height:90px;border-radius:50%;
-  background:#FFF8E7;border:none;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-}
-.inner-circle{
-  width:65px;height:65px;border-radius:50%;
-  border:3px solid rgba(0,0,0,0.2);
-}
-
-#flashEffect{
-  position:fixed;inset:0;background:white;
-  opacity:0;pointer-events:none;z-index:10000;
-}
-</style>
+    @media (max-width:390px){.status{font-size:11px}.top h1{font-size:16px}.top h1 b{font-weight:700}}
+  </style>
 </head>
-
 <body>
+  <main class="screen">
+    <div class="status"><div>9:41</div><div class="icons">◔ ◕ ▮</div></div>
+    <div class="top">
+      <h1>Shubh Prabhaat, <b>Seema</b></h1>
+      <div class="avatar"><img src="images/profile.png" alt="profile"></div>
+    </div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <span class="grow">Hindi ya English mein puche</span>
+      <svg viewBox="0 0 24 24" aria-label="Microphone"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M6 11a6 6 0 0 0 12 0"></path><path d="M12 17v4"></path></svg>
+    </div>
+    <div class="hero" aria-label="Festival highlights slideshow">
+      <img class="hero-slide active" src="images/hero1.png" alt="friends celebrating">
+      <img class="hero-slide" src="images/hero2.png" alt="festival portrait">
+      <img class="hero-slide" src="images/hero3.png" alt="traditional celebration">
+    </div>
+    <div class="highlight">
+      <div>Jaipur wali shaadi ki jhalkiya..🥰<small>225 ready to view</small></div>
+      <svg viewBox="0 0 24 24" aria-label="Open"><path d="M9 6l6 6-6 6"></path></svg>
+    </div>
+    <div class="h-scroll">
+      <div class="mini-card"><img src="images/gm.png" alt=""><p>Good morning, wishes</p></div>
+      <div class="mini-card"><img src="images/blur-after.png" alt=""><p>Enhance photo - with enhance flow</p></div>
+      <div class="mini-card"><img src="images/hero3.png" alt=""><p>Create desi avatar</p></div>
+      <div class="mini-card"><img src="images/blur-before.png" alt=""><p>Change background</p></div>
+      <div class="mini-card"><img src="images/hero2.png" alt=""><p>Apply frames</p></div>
+    </div>
+    <div class="chips">
+      <span class="chip" style="background:#ff3d65">Birthday</span>
+      <span class="chip" style="background:#ffe154">Wedding</span>
+      <span class="chip" style="background:#54e59d">Goa trip</span>
+      <span class="chip" style="background:#cb67ff">Meena ki shaadi</span>
+      <span class="chip" style="background:#ffa741">Festivals</span>
+    </div>
+    <section class="section">
+      <h2>For you 💕</h2>
+      <p>Because of Shivratri & recent celebrations</p>
+      <div class="h-scroll for-you">
+        <div class="story"><img src="images/gm.png" alt=""><span>Festivals</span></div>
+        <div class="story"><img src="images/profile1.jpg" alt=""><span>Shivratri video is ready 😍</span><small class="ai-badge">Made with AI ✨</small></div>
+        <div class="story"><img src="images/hero3.png" alt=""><span>Celebration 💃</span></div>
+      </div>
+    </section>
 
-<div class="app">
+    <div class="tool-banners">
+      <div class="tool-banner status-banner">
+        <h4>🖊️ Status maker</h4>
+        <p>Create any status in one click</p>
+        <button type="button">Create</button>
+      </div>
+      <div class="tool-banner camera-tool-banner" id="aiCameraTrigger" onclick="openCameraJourney()">
+        <h4>📷 AI camera</h4>
+        <p>Capture smarter, every time</p>
+        <button type="button">Try Now</button>
+      </div>
+    </div>
 
-<div class="top-bar">
-  <div>Shubh Prabhaat, <b>Seema</b></div>
-  <div class="profile">
-    <img src="images/profile.png">
-  </div>
-</div>
+    <section class="section">
+      <h2>Memories🥰</h2>
+      <p>A blast from the past...</p>
+      <div class="h-scroll">
+        <div class="story"><img src="images/gm.png" alt=""><span>Holi 2024</span></div>
+        <div class="story"><img src="images/profile1.jpg" alt=""><span>Over the years</span></div>
+        <div class="story"><img src="images/hero1.png" alt=""><span>Family 2022</span></div>
+        <div class="story"><img src="images/hero3.png" alt=""><span>Navratri 2025</span></div>
+      </div>
+    </section>
 
-<!-- HERO -->
-<div class="hero">
-  <img src="images/hero1.png" class="slide active">
-  <img src="images/hero2.png" class="slide">
-  <img src="images/hero3.png" class="slide">
-</div>
-<!-- SUGGESTIONS SECTION -->
-<div class="suggestions-row">
+    <section class="section">
+      <h2>AI magic for you ✨</h2>
+      <div class="h-scroll">
+        <div class="magic"><img src="images/hero1.png" alt=""><b>Holi video made for you</b></div>
+        <div class="magic"><img src="images/profile1.jpg" alt=""><b>We auto-enhanced a photo</b></div>
+        <div class="magic"><img src="images/hero2.png" alt=""><b>Sharable reels generated</b></div>
+      </div>
+    </section>
 
-  <div class="suggestion-card">
-    <img src="images/gm.png">
-    <div class="suggestion-overlay">
-      <p>Good morning</p>
+    <div class="cta" id="magicBannerTrigger">Try some AI magic ✨<small>Quickly turn you photos into work of art</small></div>
+    <h3 class="collage-title">Collages</h3>
+    <div class="subtitle">select a template</div>
+    <div class="collage">
+      <div class="col"><img src="images/profile1.jpg" alt=""><img src="images/hero2.png" alt=""><img src="images/gm.png" alt=""></div>
+      <div class="col"><img src="images/hero3.png" alt=""><img src="images/profile1.jpg" alt=""><img src="images/blur-after.png" alt=""></div>
+      <div class="col tall"><img src="images/hero1.png" alt=""><img src="images/blur-before.png" alt=""></div>
+    </div>
+    <h3 class="video-title">Create a video</h3>
+    <div class="tag-cloud">
+      <span class="tag">Birthday</span><span class="tag"><img src="images/profile.png" alt="">Nitin</span><span class="tag">Wedding</span><span class="tag">Vaishno Devi</span>
+      <span class="tag">Udaipur</span><span class="tag">Diwali</span><span class="tag"><img src="images/profile.png" alt="">Deepika</span><span class="tag">Wedding in Pune</span>
+      <span class="tag">Mugdha weds Vijay</span><span class="tag"><img src="images/profile.png" alt="">Roxy</span><span class="tag"><img src="images/ghibli.png" alt="">Flowers</span>
+      <span class="tag"><img src="images/profile.png" alt="">Spruha</span><span class="tag">Dance</span><span class="tag">Food</span><span class="tag">Guhaghar</span>
+    </div>
+  </main>
+
+  <div class="bottom">
+    <div class="dock">
+      <svg viewBox="0 0 24 24" aria-label="Home"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
+      <svg viewBox="0 0 24 24" aria-label="Gallery"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="1.6"></circle><path d="m21 16-5-4-4 3-2-2-4 3"></path></svg>
+      <svg viewBox="0 0 24 24" aria-label="Document"><path d="M8 3h6l4 4v14H8z"></path><path d="M14 3v5h4"></path></svg>
+    </div>
+    <div class="fab-wrap">
+      <div class="fab" aria-label="Add"><svg class="add-icon" viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></div>
+      <div class="fab camera-fab" id="bottomCameraTrigger" aria-label="Camera"><svg viewBox="0 0 24 24"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg></div>
     </div>
   </div>
 
-  <div class="suggestion-card">
-    <img src="images/blur-before.png">
-    <div class="suggestion-overlay">
-      <p>Enhance photos</p>
+  <section class="camera-screen" id="cameraScreen">
+    <div class="cam-top">
+      <button class="cam-icon-btn" id="cameraClose">×</button>
+      <div style="display:flex;gap:12px;font-size:14px"><span>⌁</span><span>⚙</span></div>
     </div>
-  </div>
-
-  <div class="suggestion-card">
-    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600">
-    <div class="suggestion-overlay">
-      <p>Indian wedding</p>
+    <div class="cam-card">
+      <div class="focus-ring"></div>
+      <div>
+        <div class="cam-modes"><span>SLO-MO</span><b>PHOTO</b><span>VIDEO</span></div>
+        <div class="cam-note">AI AUTO FOCUS ACTIVE</div>
+      </div>
     </div>
-  </div>
-
-</div>
-<div class="ai-camera" onclick="openCamera()">
-  <strong>Try the AI Camera</strong>
-  📷
-</div>
-
-<!-- FOR YOU -->
-<div class="section">
-  <h3>For you 💕</h3>
-  <div class="card-row">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600">
+    <div class="cam-controls">
+      <div class="thumb"><img src="images/profile1.jpg" alt="thumb"></div>
+      <button class="capture" id="captureButton" aria-label="Capture"></button>
+      <button class="cam-icon-btn" style="background:#ffffff1b">↻</button>
     </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600">
+  </section>
+
+  <section class="preview-screen" id="previewScreen">
+    <div class="preview-top">
+      <button class="preview-icon-btn" id="previewBack">←</button>
+      <div class="preview-title">PREVIEW</div>
+      <button class="preview-icon-btn" id="previewDone">✓</button>
     </div>
-  </div>
-</div>
-
-<!-- MEMORIES -->
-<div class="section">
-  <h3>Memories 🥰</h3>
-  <div class="card-row">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1529634895406-fef4e3fbc7a2?w=600">
+    <div class="preview-image-wrap"><img id="previewImage" src="images/profile1.jpg" alt="Preview"></div>
+    <div class="magic-label">✨ AI STUDIO MAGIC</div>
+    <button class="enhance">✺ &nbsp; AI ENHANCE</button>
+    <div class="preview-actions">
+      <button>⍟<br>ANIMATE</button>
+      <button>✣<br>REMIX</button>
+      <button>◉<br>TILE EDIT</button>
     </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600">
+    <div class="retake">RETAKE PHOTO</div>
+  </section>
+
+
+
+  <section class="magic-screen" id="magicScreen">
+    <div class="magic-head">
+      <button class="magic-close" id="magicBack">←</button>
+      <h4>MAGIC STUDIO</h4>
+      <button class="magic-close" id="magicDone">✓</button>
     </div>
-  </div>
-</div>
-
-<!-- AI MAGIC -->
-<div class="section">
-  <h3>AI Magic ✨</h3>
-  <div class="card-row">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600">
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600">
-    </div>
-  </div>
-</div>
-
-<!-- COLLAGES -->
-<div class="section">
-  <h3>Collages</h3>
-  <div class="collage-grid">
-    <img src="https://images.unsplash.com/photo-1529634895406-fef4e3fbc7a2?w=400">
-    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400">
-    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400">
-  </div>
-</div>
-
-<!-- VIDEO -->
-<div class="section">
-  <h3>Create a video</h3>
-  <div class="video-tags">
-    <div class="video-tag">Birthday</div>
-    <div class="video-tag">Wedding</div>
-    <div class="video-tag">Diwali</div>
-  </div>
-</div>
-
-</div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-wrapper">
-
-  <div class="bottom-left">
-    <!-- HOME -->
-    <svg viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2">
-      <path d="M3 10L12 3l9 7v10H3z"/>
-    </svg>
-
-    <!-- GALLERY -->
-    <svg viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2">
-      <rect x="4" y="4" width="16" height="16" rx="2"/>
-      <circle cx="9" cy="9" r="2"/>
-    </svg>
-
-    <!-- WRITE -->
-    <svg viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2">
-      <path d="M3 21v-3l12-12 3 3-12 12H3z"/>
-    </svg>
-  </div>
-
-  <div class="bottom-right">
-    <!-- PLUS -->
-    <div class="circle-btn yellow">
-      <svg viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2">
-        <line x1="12" y1="5" x2="12" y2="19"/>
-        <line x1="5" y1="12" x2="19" y2="12"/>
-      </svg>
+    <div class="magic-tabs">
+      <button class="magic-tab active" data-tab="oneTouch">ONE-TOUCH EDIT</button>
+      <button class="magic-tab" data-tab="aiCreative">AI CREATIVE</button>
     </div>
 
-    <!-- CAMERA -->
-    <div class="circle-btn pink">
-      <svg viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2">
-        <rect x="3" y="7" width="18" height="14" rx="3"/>
-        <circle cx="12" cy="14" r="3"/>
-      </svg>
+    <div class="magic-pane active" id="oneTouch">
+      <div class="magic-grid">
+        <div class="compare-card effect-option" data-label="UNBLUR PHOTO">
+          <div class="compare-frame">
+            <img class="compare-before" src="images/blur-before.png" alt="before">
+            <img class="compare-after" src="images/blur-after.png" alt="after">
+          </div>
+          <input class="compare-range" type="range" min="0" max="100" value="50">
+          <div class="compare-label">UNBLUR PHOTO</div>
+        </div>
+        <div class="compare-card effect-option" data-label="OBJECT REMOVER">
+          <div class="compare-frame">
+            <img class="compare-before" src="images/hero2.png" alt="before">
+            <img class="compare-after" src="images/hero3.png" alt="after">
+          </div>
+          <input class="compare-range" type="range" min="0" max="100" value="50">
+          <div class="compare-label">OBJECT REMOVER</div>
+        </div>
+        <div class="compare-card effect-option" data-label="ENHANCE PHOTO">
+          <div class="compare-frame">
+            <img class="compare-before" src="images/gm.png" alt="before">
+            <img class="compare-after" src="images/profile1.jpg" alt="after">
+          </div>
+          <input class="compare-range" type="range" min="0" max="100" value="50">
+          <div class="compare-label">ENHANCE PHOTO</div>
+        </div>
+      </div>
     </div>
-  </div>
 
-</div>
-
-<!-- CAMERA SCREEN -->
-<div id="cameraScreen" class="camera-screen">
-
-  <div class="camera-header">
-    <button onclick="closeCamera()" class="camera-close">✕</button>
-    <div>⚡ ⚙</div>
-  </div>
-
-  <div class="camera-preview">
-    <div class="focus-circle"></div>
-  </div>
-
-  <div class="camera-controls">
-    <div class="gallery-thumb">
-      <img src="https://images.unsplash.com/photo-1529634895406-fef4e3fbc7a2?w=200">
+    <div class="magic-pane" id="aiCreative">
+      <div class="magic-section">
+        <h5>DESI AI AVATARS</h5>
+        <div class="magic-row">
+          <div class="magic-item"><img src="images/hero3.png" alt=""><p>RAJKUMARI</p></div>
+          <div class="magic-item"><img src="images/hero1.png" alt=""><p>RAJKUMAR</p></div>
+        </div>
+      </div>
+      <div class="magic-section">
+        <h5>STUDIO FRAMES 🇮🇳</h5>
+        <div class="magic-row">
+          <div class="magic-item"><img src="images/ghibli.png" alt=""><p>ROYAL GOLD</p></div>
+          <div class="magic-item"><img src="images/blur-before.png" alt=""><p>MODERN BLACK</p></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <button class="capture-btn" onclick="capturePhoto()">
-      <div class="inner-circle"></div>
-    </button>
 
-    <div>⟳</div>
-  </div>
+  <section class="pick-screen" id="pickScreen">
+    <div class="pick-head">
+      <button class="magic-close" id="pickBack">←</button>
+      <h5>PICK A PHOTO</h5>
+    </div>
+    <div class="pick-grid">
+      <div class="pick-item"><img src="images/blur-before.png" data-src="images/blur-before.png" alt="pick"></div>
+      <div class="pick-item"><img src="images/profile1.jpg" data-src="images/profile1.jpg" alt="pick"></div>
+      <div class="pick-item"><img src="images/hero2.png" data-src="images/hero2.png" alt="pick"></div>
+    </div>
+  </section>
 
-</div>
+  <section class="apply-screen" id="applyScreen">
+    <div class="pick-head">
+      <button class="magic-close" id="applyBack">←</button>
+      <h5 id="applyHeading">APPLY ENHANCEMENT</h5>
+    </div>
+    <div class="apply-title" id="applyEffectLabel">Effect</div>
+    <div class="apply-card"><img id="applyImage" src="images/profile1.jpg" alt="apply"></div>
+    <button class="apply-btn" id="applyAction">APPLY ENHANCEMENT</button>
+  </section>
 
-<div id="flashEffect"></div>
+  <script>
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    let heroIndex = 0;
+    setInterval(() => {
+      heroSlides[heroIndex].classList.remove('active');
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('active');
+    }, 2800);
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const slides = document.querySelectorAll(".slide");
-  let index = 0;
-  setInterval(() => {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-  }, 3000);
-});
+    const cameraScreen = document.getElementById('cameraScreen');
+    const previewScreen = document.getElementById('previewScreen');
+    const previewImage = document.getElementById('previewImage');
+    const magicScreen = document.getElementById('magicScreen');
+    const pickScreen = document.getElementById('pickScreen');
+    const applyScreen = document.getElementById('applyScreen');
+    const applyImage = document.getElementById('applyImage');
+    const applyEffectLabel = document.getElementById('applyEffectLabel');
 
-function openCamera(){
-  document.getElementById("cameraScreen").style.display="flex";
-}
+    const randomPhotos = ['images/profile1.jpg','images/gm.png','images/hero1.png','images/hero2.png','images/hero3.png','images/ghibli.png'];
+    let selectedEffectAfter = 'images/blur-after.png';
 
-function closeCamera(){
-  document.getElementById("cameraScreen").style.display="none";
-}
+    function openCameraJourney(){
+      previewScreen.classList.remove('active');
+      cameraScreen.classList.add('active');
+    }
+    function closeJourney(){
+      cameraScreen.classList.remove('active');
+      previewScreen.classList.remove('active');
+    }
+    function captureRandomPhoto(){
+      const pick = randomPhotos[Math.floor(Math.random() * randomPhotos.length)];
+      previewImage.src = pick;
+      cameraScreen.classList.remove('active');
+      previewScreen.classList.add('active');
+    }
 
-function capturePhoto(){
-  const flash = document.getElementById("flashEffect");
-  flash.style.opacity = "1";
-  setTimeout(()=>{ flash.style.opacity = "0"; },200);
-}
-</script>
+    function openMagicStudio(){
+      pickScreen.classList.remove('active');
+      applyScreen.classList.remove('active');
+      magicScreen.classList.add('active');
+    }
+    function closeMagicStudio(){
+      magicScreen.classList.remove('active');
+      pickScreen.classList.remove('active');
+      applyScreen.classList.remove('active');
+    }
 
+    document.getElementById('aiCameraTrigger').addEventListener('click', openCameraJourney);
+    document.getElementById('aiCameraTrigger').addEventListener('touchstart', openCameraJourney, {passive:true});
+    document.getElementById('bottomCameraTrigger').addEventListener('click', openCameraJourney);
+    document.getElementById('cameraClose').addEventListener('click', closeJourney);
+    document.getElementById('captureButton').addEventListener('click', captureRandomPhoto);
+    document.getElementById('previewBack').addEventListener('click', openCameraJourney);
+    document.getElementById('previewDone').addEventListener('click', closeJourney);
+
+    document.getElementById('magicBannerTrigger').addEventListener('click', openMagicStudio);
+    document.getElementById('magicBack').addEventListener('click', closeMagicStudio);
+    document.getElementById('magicDone').addEventListener('click', closeMagicStudio);
+
+    document.querySelectorAll('.magic-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.magic-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.magic-pane').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    setInterval(() => {
+      document.querySelectorAll('.compare-after').forEach((img, i) => {
+        const t = Date.now() / 1200 + i;
+        const v = 50 + Math.sin(t) * 35;
+        img.style.clipPath = `inset(0 0 0 ${v}%)`;
+      });
+    }, 80);
+
+    document.querySelectorAll('.effect-option').forEach((card) => {
+      card.addEventListener('click', () => {
+        selectedEffectAfter = card.querySelector('.compare-after')?.getAttribute('src') || 'images/blur-after.png';
+        applyEffectLabel.textContent = card.dataset.label || 'ENHANCE PHOTO';
+        magicScreen.classList.remove('active');
+        pickScreen.classList.add('active');
+      });
+    });
+
+    document.getElementById('pickBack').addEventListener('click', () => {
+      pickScreen.classList.remove('active');
+      magicScreen.classList.add('active');
+    });
+
+    document.querySelectorAll('.pick-item img').forEach((img) => {
+      img.addEventListener('click', () => {
+        applyImage.src = img.dataset.src || img.src;
+        document.getElementById('applyAction').textContent = 'APPLY ENHANCEMENT';
+        pickScreen.classList.remove('active');
+        applyScreen.classList.add('active');
+      });
+    });
+
+    document.getElementById('applyBack').addEventListener('click', () => {
+      applyScreen.classList.remove('active');
+      pickScreen.classList.add('active');
+    });
+
+    document.getElementById('applyAction').addEventListener('click', () => {
+      applyImage.src = selectedEffectAfter;
+      document.getElementById('applyAction').textContent = 'ENHANCEMENT APPLIED ✓';
+    });
+
+    document.querySelectorAll('img').forEach((img) => {
+      img.addEventListener('error', () => {
+        if (!img.dataset.fallbackApplied) {
+          img.dataset.fallbackApplied = '1';
+          img.src = 'images/profile1.jpg';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
