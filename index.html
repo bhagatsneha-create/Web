@@ -34,6 +34,43 @@
     .highlight{background:#980027;color:#ffe8ef;border-radius:14px;padding:8px 11px;margin-bottom:10px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;min-height:58px}
     .highlight small{display:block;font-size:11px;font-weight:500;opacity:.95;margin-top:1px}
     .highlight svg{width:18px;height:18px;stroke:#ffe8ef;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    :root{
+      --bg:#120406;
+      --card:#241014;
+      --text:#fff5f6;
+      --muted:#d4bfc2;
+      --pink:#ea3f73;
+      --yellow:#f9be42;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Encode Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 55% 0%, #3b0c13 0%, #120406 45%, #060304 100%);
+      color:var(--text);
+      min-height:100vh;
+    }
+    .screen{max-width:390px;margin:0 auto;padding:8px 12px 110px}
+    .status{display:flex;justify-content:space-between;align-items:center;padding:4px 2px 10px;font-weight:700;font-size:22px}
+    .status .icons{font-size:12px;letter-spacing:1px;opacity:.9}
+
+    .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .top h1{font-size:30px;line-height:1.2;font-weight:500}
+    .top h1 b{font-weight:800}
+    .avatar{width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid #fff7}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    .search{display:flex;align-items:center;gap:10px;background:#7e001f;border:2px solid #f9dfe7;padding:11px 12px;border-radius:10px;margin-bottom:10px;font-weight:600;font-size:15px}
+    .search .grow{flex:1}
+    .search svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+    .hero{position:relative;border-radius:16px;overflow:hidden;height:218px;margin-bottom:10px;box-shadow:0 8px 24px #0008}
+    .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity .6s ease}
+    .hero-slide.active{opacity:1}
+
+    .highlight{background:#980027;color:#ffe8ef;border-radius:14px;padding:10px 14px;margin-bottom:10px;font-size:20px;font-weight:700;display:flex;justify-content:space-between;align-items:center;min-height:70px}
+    .highlight small{display:block;font-size:15px;font-weight:500;opacity:.95;margin-top:2px}
+    .highlight svg{width:18px;height:18px;stroke:#ffe8ef;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
     .h-scroll{display:flex;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:none}
     .h-scroll::-webkit-scrollbar{display:none}
     .mini-card{min-width:104px;background:#f7efe4;color:#1f1616;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px #0006}
@@ -64,6 +101,34 @@
     .cta small{display:block;font-size:12px;font-weight:500}
     .collage-title,.video-title{font-size:34px;color:#f7c843;font-weight:800;text-align:center;margin-top:8px}
     .subtitle{font-size:15px;color:#f2d495;text-align:center;margin-bottom:10px}
+    .mini-card p{padding:7px 8px;font-size:12px;font-weight:600;white-space:nowrap}
+
+    .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px 0 12px}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{padding:8px 12px;border-radius:10px;color:#120406;font-size:13px;font-weight:700;white-space:nowrap}
+
+    .section{margin:14px 0 8px}
+    .section h2{font-size:32px;font-weight:800;margin-bottom:2px}
+    .section p{color:var(--muted);font-size:23px;margin-bottom:10px}
+
+    .story{min-width:118px;height:170px;border-radius:12px;overflow:hidden;position:relative}
+    .story img{width:100%;height:100%;object-fit:cover}
+    .story span{position:absolute;left:8px;bottom:8px;font-size:13px;font-weight:700;text-shadow:0 2px 6px #000}
+
+    .camera-banner{display:flex;justify-content:space-between;align-items:center;background:#dfc8f2;color:#1d1820;padding:10px 12px;border-radius:14px;margin:14px 0;min-height:72px}
+    .camera-banner b{font-size:24px}
+    .camera-banner span{font-size:18px;opacity:.8}
+    .camera-banner svg{width:24px;height:24px;stroke:#1d1820;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+    .magic{min-width:128px;height:188px;border-radius:14px;overflow:hidden;position:relative}
+    .magic img{width:100%;height:100%;object-fit:cover}
+    .magic b{position:absolute;left:10px;bottom:26px;font-size:14px}
+    .cta{margin:16px 0;background:#f4a934;color:#241105;border-radius:10px;text-align:center;padding:10px 10px;font-weight:800;font-size:33px;min-height:76px;display:flex;flex-direction:column;justify-content:center;gap:3px}
+    .cta small{display:block;font-size:18px;font-weight:600;margin-top:0}
+
+    .collage-title,.video-title{font-size:49px;color:#f7c843;font-weight:800;text-align:center;margin-top:8px}
+    .subtitle{font-size:23px;color:#f2d495;text-align:center;margin-bottom:10px}
+
     .collage{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
     .collage::-webkit-scrollbar{display:none}
     .col{display:grid;gap:8px;min-width:142px}
@@ -147,25 +212,45 @@
 
 
     @media (max-width:390px){.status{font-size:11px}.top h1{font-size:16px}.top h1 b{font-weight:700}}
+
+    .tag-cloud{display:flex;flex-wrap:wrap;gap:9px;justify-content:flex-start;margin-bottom:32px}
+    .tag{background:#fff;color:#2c1a1c;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px}
+    .tag img{width:18px;height:18px;border-radius:50%;object-fit:cover}
+
+    .bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;max-width:390px;width:calc(100% - 24px);display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+    .dock{background:var(--yellow);border-radius:999px;padding:14px 28px;display:flex;gap:36px;box-shadow:0 12px 26px #0009;pointer-events:auto}
+    .dock svg,.fab svg{width:19px;height:19px;stroke:#120805;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .fab-wrap{display:flex;gap:10px;pointer-events:auto}
+    .fab{width:44px;height:44px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;box-shadow:0 10px 22px #0009}
+
+    @media (max-width:390px){
+      .status{font-size:11px}
+      .top h1{font-size:28px}
+      .top h1 b{font-weight:700}
+    }
   </style>
 </head>
 <body>
   <main class="screen">
     <div class="status"><div>9:41</div><div class="icons">◔ ◕ ▮</div></div>
+
     <div class="top">
       <h1>Shubh Prabhaat, <b>Seema</b></h1>
       <div class="avatar"><img src="images/profile.png" alt="profile"></div>
     </div>
+
     <div class="search">
       <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
       <span class="grow">Hindi ya English mein puche</span>
       <svg viewBox="0 0 24 24" aria-label="Microphone"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M6 11a6 6 0 0 0 12 0"></path><path d="M12 17v4"></path></svg>
     </div>
+
     <div class="hero" aria-label="Festival highlights slideshow">
       <img class="hero-slide active" src="images/hero1.png" alt="friends celebrating">
       <img class="hero-slide" src="images/hero2.png" alt="festival portrait">
       <img class="hero-slide" src="images/hero3.png" alt="traditional celebration">
     </div>
+
     <div class="highlight">
       <div>Jaipur wali shaadi ki jhalkiya..🥰<small>225 ready to view</small></div>
       <svg viewBox="0 0 24 24" aria-label="Open"><path d="M9 6l6 6-6 6"></path></svg>
@@ -177,6 +262,14 @@
       <div class="mini-card"><img src="images/blur-before.png" alt=""><p>Change background</p></div>
       <div class="mini-card"><img src="images/hero2.png" alt=""><p>Apply frames</p></div>
     </div>
+
+    <div class="h-scroll">
+      <div class="mini-card"><img src="images/profile1.jpg" alt=""><p>Meera's photos</p></div>
+      <div class="mini-card"><img src="images/ghibli.png" alt=""><p>Try Ghibli ✨</p></div>
+      <div class="mini-card"><img src="images/blur-before.png" alt=""><p>Enhance photos</p></div>
+      <div class="mini-card"><img src="images/gm.png" alt=""><p>Create greetings</p></div>
+    </div>
+
     <div class="chips">
       <span class="chip" style="background:#ff3d65">Birthday</span>
       <span class="chip" style="background:#ffe154">Wedding</span>
@@ -195,6 +288,18 @@
     </section>
 
     <div class="camera-banner" id="aiCameraTrigger" onclick="openCameraJourney()"><div><b>Try the AI camera</b><br><span>Point, shoot, and let AI wow you</span></div><svg viewBox="0 0 24 24" aria-label="Camera"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg></div>
+
+    <section class="section">
+      <h2>For you 💕</h2>
+      <p>Because of Shivratri & recent celebrations</p>
+      <div class="h-scroll">
+        <div class="story"><img src="images/hero2.png" alt=""><span>Festivals</span></div>
+        <div class="story"><img src="images/profile1.jpg" alt=""><span>Shivratri video is Ready</span></div>
+        <div class="story"><img src="images/hero3.png" alt=""><span>Celebration 🪔</span></div>
+      </div>
+    </section>
+
+    <div class="camera-banner"><div><b>Try the AI camera</b><br><span>Point, shoot, and let AI wow you</span></div><svg viewBox="0 0 24 24" aria-label="Camera"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg></div>
 
     <section class="section">
       <h2>Memories🥰</h2>
@@ -224,6 +329,23 @@
       <div class="col"><img src="images/hero3.png" alt=""><img src="images/profile1.jpg" alt=""><img src="images/blur-after.png" alt=""></div>
       <div class="col tall"><img src="images/hero1.png" alt=""><img src="images/blur-before.png" alt=""></div>
     </div>
+    <div class="cta">Try some AI magic ✨<small>Quickly turn you photos into work of art</small></div>
+
+    <h3 class="collage-title">Collages</h3>
+    <div class="subtitle">select a template</div>
+
+    <div class="collage">
+      <div class="col">
+        <img src="images/profile1.jpg" alt=""><img src="images/hero2.png" alt=""><img src="images/gm.png" alt="">
+      </div>
+      <div class="col">
+        <img src="images/hero3.png" alt=""><img src="images/profile1.jpg" alt=""><img src="images/blur-after.png" alt="">
+      </div>
+      <div class="col tall">
+        <img src="images/hero1.png" alt=""><img src="images/blur-before.png" alt="">
+      </div>
+    </div>
+
     <h3 class="video-title">Create a video</h3>
     <div class="tag-cloud">
       <span class="tag">Birthday</span><span class="tag"><img src="images/profile.png" alt="">Nitin</span><span class="tag">Wedding</span><span class="tag">Vaishno Devi</span>
@@ -363,10 +485,19 @@
     <div class="apply-card"><img id="applyImage" src="images/profile1.jpg" alt="apply"></div>
     <button class="apply-btn" id="applyAction">APPLY ENHANCEMENT</button>
   </section>
+      <div class="fab" aria-label="Add">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+      </div>
+      <div class="fab" aria-label="Camera">
+        <svg viewBox="0 0 24 24"><path d="M4 8h4l1.5-2h5L16 8h4v11H4z"></path><circle cx="12" cy="13.5" r="3.2"></circle></svg>
+      </div>
+    </div>
+  </div>
 
   <script>
     const heroSlides = document.querySelectorAll('.hero-slide');
     let heroIndex = 0;
+
     setInterval(() => {
       heroSlides[heroIndex].classList.remove('active');
       heroIndex = (heroIndex + 1) % heroSlides.length;
